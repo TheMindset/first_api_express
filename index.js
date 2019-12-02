@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-const Paper = require('./lib/models/paper')
+const papers = require('./lib/routes/api/v1/papers')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,15 +18,7 @@ app.listen(app.get('port'), () => {
 });
 
 // Static routes
-app.get('/api/v1/papers', (request, response) => {
-  Paper.all()
-    .then((papers) => {
-      response.status(200).json(papers);
-    })
-    .catch((error) => {
-      response.status(500).json({ error });
-    });
-});
+app.use('/api/v1/papers', papers)
 
 app.get('/api/v1/footnotes', (request, response) => {
   database('footnotes').select()
