@@ -2,8 +2,9 @@
   "name": "first_app_express",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start" : "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,5 +14,8 @@
     "express": "^4.17.1",
     "knex": "^0.20.2",
     "pg": "^7.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
   }
 }
