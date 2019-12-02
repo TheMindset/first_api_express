@@ -21,15 +21,6 @@ app.listen(app.get('port'), () => {
 // Static routes
 app.use('/api/v1/papers', papers)
 
-// app.get('/api/v1/footnotes', (request, response) => {
-//   database('footnotes').select()
-//   .then((footnotes) => {
-//     response.status(200).json(footnotes);
-//   })
-//   .catch((error) => {
-//     response.status(500).json({ error });
-//   });
-// });
 app.use('/api/v1/footnotes', footnotes)
 
 
@@ -78,18 +69,4 @@ app.post('/api/v1/footnotes', (request, response) => {
 app.use('/api/v1/papers', papers)
 
 
-app.get('/api/v1/footnotes/:id', (request, response) => {
-  database('footnotes').where('id', request.params.id).select()
-  .then(footnotes => {
-    if (footnotes.length) {
-      response.status(200).json(footnotes)
-    } else {
-      response.status(400).json( {
-        error: ` Could not find footnotes with id ${request.params.id}`
-      });
-    }
-  })
-  .catch(error => {
-    response.status(500).json({ error })
-  });
-});
+app.use('/api/v1/footnotes', footnotes)
