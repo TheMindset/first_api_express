@@ -72,21 +72,8 @@ app.post('/api/v1/footnotes', (request, response) => {
 
 
 // Dynamique routes
-app.get('/api/v1/papers/:id', (request, response) => {
-  database('papers').where('id', request.params.id).select()
-  .then(papers => {
-    if (papers.length) {
-      response.status(200).json(papers)
-    } else {
-      response.status(400).json({
-        error: `Could not find paper with id ${request.params.id}`
-      });
-    }
-  })
-  .catch(error => {
-    response.status(500).json({ error })
-  });
-});
+app.use('/api/v1/papers', papers)
+
 
 app.get('/api/v1/footnotes/:id', (request, response) => {
   database('footnotes').where('id', request.params.id).select()
