@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 
 const papers = require('./lib/routes/api/v1/papers')
+const footnotes = require('./lib/routes/api/v1/footnotes')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,15 +21,17 @@ app.listen(app.get('port'), () => {
 // Static routes
 app.use('/api/v1/papers', papers)
 
-app.get('/api/v1/footnotes', (request, response) => {
-  database('footnotes').select()
-  .then((footnotes) => {
-    response.status(200).json(footnotes);
-  })
-  .catch((error) => {
-    response.status(500).json({ error });
-  });
-});
+// app.get('/api/v1/footnotes', (request, response) => {
+//   database('footnotes').select()
+//   .then((footnotes) => {
+//     response.status(200).json(footnotes);
+//   })
+//   .catch((error) => {
+//     response.status(500).json({ error });
+//   });
+// });
+app.use('/api/v1/footnotes', footnotes)
+
 
 // Post routes
 app.post('/api/v1/papers', (request, response) => {
